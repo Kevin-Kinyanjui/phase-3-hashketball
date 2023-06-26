@@ -199,3 +199,70 @@ def big_shoe_rebounds
 end
 puts big_shoe_rebounds
 
+def most_points_scored
+  most_points = 0
+  player_with_most_points = ""
+
+  game_hash.each do |team, team_data|
+    team_data[:players].each do |player|
+      if player[:points] > most_points
+        most_points = player[:points]
+        player_with_most_points = player[:player_name]
+      end
+    end
+  end
+
+  player_with_most_points
+end
+puts most_points_scored
+
+def winning_team
+  home_team_points = 0
+  away_team_points = 0
+
+  game_hash[:home][:players].each do |player|
+    home_team_points += player[:points]
+  end
+
+  game_hash[:away][:players].each do |player|
+    away_team_points += player[:points]
+  end
+
+  home_team_points > away_team_points ? game_hash[:home][:team_name] : game_hash[:away][:team_name]
+end
+puts winning_team
+
+def player_with_longest_name
+  longest_name = ""
+  max_length = 0
+
+  game_hash.each do |team, team_data|
+    team_data[:players].each do |player|
+      if player[:player_name].length > max_length
+        max_length = player[:player_name].length
+        longest_name = player[:player_name]
+      end
+    end
+  end
+
+  longest_name
+end
+puts player_with_longest_name
+
+def long_name_steals_a_ton?
+  most_steals = 0
+  player_with_most_steals = ""
+
+  game_hash.each do |team, team_data|
+    team_data[:players].each do |player|
+      if player[:steals] > most_steals
+        most_steals = player[:steals]
+        player_with_most_steals = player[:player_name]
+      end
+    end
+  end
+
+  player_with_most_steals == player_with_longest_name
+end
+puts long_name_steals_a_ton?
+
